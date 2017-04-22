@@ -5,3 +5,11 @@ var capitalizeFirstLetter = function(string) {
 var date = function(year, month, day) {
 	return month + '/' + day + '/' + year;
 }
+
+var dollarAmount = function(amount){
+	return '$'+amount.toFixed(2);
+}
+
+var twoDecimalAmount = function(amount){
+	return amount.toFixed(2);
+}

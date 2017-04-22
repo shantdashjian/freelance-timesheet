@@ -1,17 +1,25 @@
 $(document).ready(function() {
+	run();
+})
+
+var run = function(){
 	assignEventListenersToNavbar();
 	showCreateWorkItemForm();
-})
+}
 
 var assignEventListenersToNavbar = function(){
 	$('#newButton').on('click', function(event){
 		event.preventDefault();
 		showCreateWorkItemForm();
-	})
+	});
 	$('#historyButton').on('click', function(event){
 		event.preventDefault();
 		loadData();
-	})
+	});
+	$('#reportButton').on('click', function(event){
+		event.preventDefault();
+		showReport();
+	});
 }
 
 var loadData = function() {
@@ -28,7 +36,7 @@ var loadData = function() {
 
 var listWorkItemsAndShowCreateWorkItemButton = function(workItems) {
     $('#content').empty();
-    var $table = $('<table id="table" class="table table-bordered table-striped bordered">');
+    var $table = $('<table id="historyTable" class="table table-bordered table-striped bordered">');
 
     var $thead = $('<thead>');
     $thead.append('<tr><th>Work Item Period</th><th>Date</th><th class="fit">Action</th><th class="fit">Action</th><th class="fit">Action</th></tr>');
@@ -151,7 +159,7 @@ var showWorkItemDetails = function(workItem) {
 	$details.append('<div class="form-group"><label for="period" class="label label-info control-label">Period</label>'+
 			'<span id="period" name="period">'+workItem.period+'</span><span> hours</span></div>');
 	$details.append('<div class="form-group"><label class="label label-info control-label">Rate</label>'+
-			'<span id="rate" name="rate">$'+workItem.rate+'</span><span>/hr</span></div>');
+			'<span id="rate" name="rate">' + dollarAmount(workItem.rate) + '</span><span>/hr</span></div>');
 	$details.append('<div class="form-group"><label class="label label-info control-label">Date</label>'+
 			'<span id="date" name="date">'+date(workItem.year,workItem.month, workItem.day) +'</span></div>');
 	
@@ -164,7 +172,7 @@ var showWorkItemDetails = function(workItem) {
 var showWorkItemDetailsToEdit = function(workItem) {
 	var $form = $('<form name="editWorkItemForm" id="editWorkItemForm">');
 	$form.append('<label for="period">Period: </label><input id="period" type="number" name="period" min="1"  value="'+workItem.period+'" required><label>Hours</label><br>');
-	$form.append('<label for="rate">Rate: $</label><input id="rate" type="number" name="rate" min="1"  value="'+workItem.rate+'" required><label>/hr</label><br>');
+	$form.append('<label for="rate">Rate: $</label><input id="rate" type="number" name="rate" min="1.00"  step="0.01" value="'+twoDecimalAmount(workItem.rate)+'" required><label>/hr</label><br>');
 	$form.append('<label>Date: </label>');
 	$form.append('<input id="month" type="number" name="month" min="1"  max = "12" value="'+workItem.month+'" required>');
 	$form.append('<input id="day" type="number" name="day" min="1"  max="31" value="'+workItem.day+'" required>');
@@ -279,4 +287,51 @@ var confirmWorkItemDeleted = function() {
 var addReturnButton = function() {
     $('#mainColumn').append('<button id="showWorkItems" type="button" name="button" class="btn btn-primary">History</button>');
     $('#showWorkItems').click(loadData);
+}
+
+var showReport = function() {
+	$.ajax({
+        type: 'GET',
+        url: 'api/workitems',
+        dataType: 'json'
+    }).done(function(workItems, status) {
+        showTotalPay(workItems);
+    }).fail(function(xhr, status, error) {
+        $('#content').append('<p>An Error has Occured</p>');
+    });
+	
+}
+
+var showTotalPay = function(workItems){
+	$('#content').empty();
+    var $table = $('<table id="table" class="table table-bordered table-striped bordered">');
+
+    var $thead = $('<thead>');
+    $thead.append('<tr><th class="fit">Period (Hours)</th><th class="fit">Rate per Hour</th><th class="fit">Date</th><th class="fit">Notes</th><th class="fit">Total</th></tr>');
+    $table.append($thead);
+    var $tbody = $('<tbody>');
+    var total = 0;
+    workItems.forEach(function(workItem, index, array) {
+    	var itemTotal = workItem.period * workItem.rate;
+    	total += itemTotal;
+        $tbody.append('<tr><td >' + workItem.period + '</td>'
+        				+'<td >' + dollarAmount(workItem.rate) + '</td>'
+        				+'<td>'+ date(workItem.year, workItem.month, workItem.day) + '</td>'
+        				+'<td >' + workItem.notes + '</td>'
+        				+'<td >' + dollarAmount(itemTotal) + '</td>'
+        				+'</tr>');
+    });
+    
+    $table.append($tbody);
+    var $tfoot = $('<tfoot><tr><td colspan="4" class="align-right">Total</td><td>'+dollarAmount(total) + '</td></tr><tfoot>');
+    $table.append($tfoot);
+    
+    $('#content').append('<div id="mainContainer" class="container">');
+    $('#mainContainer').append($table);
+
+    $($table).wrap('<div class="col-md-6 col-md-offset-3 bordered" id="mainColumn"></div>');
+    $('#mainColumn').wrap('<div class="row"></div>');
+    $('#mainColumn').prepend("<h1 class=' backgrounded bordered'>Report</h1>");
+	
+	addReturnButton();
 }
