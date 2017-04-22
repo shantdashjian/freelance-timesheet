@@ -1,0 +1,77 @@
+input[type="number"] {
+	width = 4em;
+}
+
+body {
+    background-image: url('../images/background.jpg');
+    text-align: center !important;
+}
+
+.fit {
+    width: 5em;
+}
+
+#mainColumn {
+    background-color: #fff;
+    opacity: 0.95;
+    margin-top: 10%;
+    margin-bottom: 1%;
+}
+
+#formColumn {
+    background-color: #fff;
+    opacity: 0.95;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+.table>tbody>tr:nth-child(odd)>td, .table>tbody>tr:nth-child(odd)>th {
+    background-color: #AFEEEE;
+}
+
+.table>tbody>tr:nth-child(even)>td, .table>tbody>tr:nth-child(even)>th {
+    background-color: #EEEEAF;
+}
+
+.table tr td:nth-child(2):hover, .table tr td:nth-child(3):hover, .table tr td:nth-child(4):hover {
+    background-color: #fff !important;
+    cursor: pointer;
+    cursor: hand;
+}
+
+th {
+    text-align: center;
+}
+
+.bordered {
+    border: 2px solid purple;
+}
+
+#mainColumn, #formColumn {
+    padding-bottom: 10px;
+}
+
+.image-column>img {
+    width: 100% !important;
+}
+
+.questions-row {
+    text-align: left;
+}
+
+#pokemon-id {
+    font-weight: bold;
+}
+
+.species-row {
+    margin-top: 4em;
+}
+
+.backgrounded {
+    background-color: #D19ED1;
+    padding: 6px;
+}
+
+input, textarea {
+    margin: 3px;
+}
