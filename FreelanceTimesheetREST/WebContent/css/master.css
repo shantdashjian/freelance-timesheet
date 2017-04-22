@@ -62,7 +62,7 @@ th {
     text-align: left;
 }
 
-#pokemon-id {
+.bold {
     font-weight: bold;
 }
 
@@ -81,4 +81,16 @@ input, textarea {
 
 .vertical-top {
 	vertical-align: top; 
+}
+
+.static-text {
+    font-weight: normal;
+}
+
+.label {
+	margin-right: 0.5em;
+}
+
+.align-left {
+	text-align: left;
 }

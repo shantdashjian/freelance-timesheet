@@ -134,36 +134,20 @@ var cleanUpAndAddMainColumn = function() {
     $('#mainRow').append('<div class="col-md-6 col-md-offset-3 bordered" id="mainColumn"></div>');
 }
 
-//var showWorkItemDetails = function(workItem) {
-//    $('#mainColumn').append('<h1  class="backgrounded bordered">' 
-//    		+ capitalizeFirstLetter(workItem.name) + '</h1>');
-//   
-//	// GET workitems/{workItemId}/questions
-//    $.ajax({
-//        type: 'GET',
-//        url: 'api/workitems/'+WorkItem.id+'/questions',
-//        dataType: 'json'
-//    }).done(function(questions, status) {
-//    	var $questionsRow = $('<div class="questions-row row">');
-//
-//        var $questionsRowColumn = $('<div class="col-md-12">');
-//        
-//        $questionsRowColumn.append('<h4>Questions:</h4>');
-//        var $questionsList = $('<ol id="questions-list">');
-//        questions.forEach(function(question, index) {
-//        	$questionsList.append('<li>' + question.questionText + '</li>');
-//        })
-//        $questionsRowColumn.append($questionsList);
-//        $questionsRow.append($questionsRowColumn);
-//        $('#mainColumn').append($questionsRow);
-//        addReturnButton();
-//        
-//    }).fail(function(xhr, status, error) {
-//        $('#mainColumn').append('<p>No questions were retrieved!</p>');
-//        addReturnButton();
-//    });
-//
-//}
+var showWorkItemDetails = function(workItem) {
+	var $details = $('<div name="details" id="details" class="form-horizontal">');
+	$details.append('<div class="form-group"><label for="period" class="label label-info control-label">Period</label>'+
+			'<span id="period" name="period">'+workItem.period+'</span><span> hours</span></div>');
+	$details.append('<div class="form-group"><label class="label label-info control-label">Rate</label>'+
+			'<span id="rate" name="rate">$'+workItem.rate+'</span><span>/hr</span></div>');
+	$details.append('<div class="form-group"><label class="label label-info control-label">Date</label>'+
+			'<span id="date" name="date">'+date(workItem.year,workItem.month, workItem.day) +'</span></div>');
+	
+    $('#mainColumn').append('<h1  class="backgrounded bordered">' 
+    		+ workItem.notes + '</h1>');
+    $('#mainColumn').append($details);
+    addReturnButton();
+}
 
 var showWorkItemDetailsToEdit = function(workItem) {
 	var $form = $('<form name="editWorkItemForm" id="editWorkItemForm">');
