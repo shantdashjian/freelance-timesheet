@@ -1,5 +1,8 @@
-input[type="number"] {
-	width = 4em;
+input[type=number] {
+	width: 4em;
+}
+input[id=day], input[id=month] {
+	width: 3em;
 }
 
 body {
@@ -13,27 +16,27 @@ body {
 
 #mainColumn {
     background-color: #fff;
-    opacity: 0.95;
+    opacity: 0.90;
     margin-top: 10%;
     margin-bottom: 1%;
 }
 
 #formColumn {
     background-color: #fff;
-    opacity: 0.95;
+    opacity: 0.90;
     margin-top: 3%;
     margin-bottom: 3%;
 }
 
-.table>tbody>tr:nth-child(odd)>td, .table>tbody>tr:nth-child(odd)>th {
+/* .table>tbody>tr:nth-child(odd)>td, .table>tbody>tr:nth-child(odd)>th {
     background-color: #AFEEEE;
 }
 
 .table>tbody>tr:nth-child(even)>td, .table>tbody>tr:nth-child(even)>th {
     background-color: #EEEEAF;
-}
+} */
 
-.table tr td:nth-child(2):hover, .table tr td:nth-child(3):hover, .table tr td:nth-child(4):hover {
+.table tr td:nth-child(3):hover, .table tr td:nth-child(4):hover, .table tr td:nth-child(5):hover {
     background-color: #fff !important;
     cursor: pointer;
     cursor: hand;
@@ -74,4 +77,8 @@ th {
 
 input, textarea {
     margin: 3px;
+}
+
+.vertical-top {
+	vertical-align: top; 
 }

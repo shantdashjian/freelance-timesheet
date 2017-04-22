@@ -16,7 +16,7 @@ var loadData = function() {
 
 var listWorkItemsAndShowCreateWorkItemButton = function(workItems) {
     $('#content').empty();
-    var $table = $('<table id="table" class="table table-bordered bordered">');
+    var $table = $('<table id="table" class="table table-bordered table-striped bordered">');
 
     var $thead = $('<thead>');
     $thead.append('<tr><th>Work Item Period</th><th>Date</th><th class="fit">Action</th><th class="fit">Action</th><th class="fit">Action</th></tr>');
@@ -215,28 +215,33 @@ var showCreateWorkItemForm = function(){
 	$('#showCreateWorkItemButton').remove();
 	$('#mainContainer').append('<div id="formRow" class="row"></div>');
 	$('#formRow').append('<div class="col-md-6 col-md-offset-3 bordered form" id="formColumn"></div>');
-	$('#formColumn').load('html/create-WorkItem-form.html', function(){		
+	$('#formColumn').load('html/create-work-item-form.html', function(){		
 		var $form = $('#createWorkItemForm');
 		$form.submit(function(event) {
 			event.preventDefault();
-			if ($(createWorkItemForm.name).val()) {
+			if ($(createWorkItemForm.period).val()) {
 				
-				var WorkItem = {
-						name: $(createWorkItemForm.name).val()
+				var workItem = {
+						period: $(createWorkItemForm.period).val(),
+						rate: $(createWorkItemForm.rate).val(),
+						month: $(createWorkItemForm.month).val(),
+						day: $(createWorkItemForm.day).val(),
+						year: $(createWorkItemForm.year).val(),
+						notes: $(createWorkItemForm.notes).val()
 				};
 				$.ajax({
 					type: "POST",
 					url: 'api/workitems',
 					dataType: "json",
 					contentType: 'application/json', //setting the request headers content-type
-					data: JSON.stringify(WorkItem) //the data being added to the request body
-				}).done(function(WorkItem, status) {
-					confirmWorkItemAdded(WorkItem);
+					data: JSON.stringify(workItem) //the data being added to the request body
+				}).done(function(workItem, status) {
+					confirmWorkItemAdded(workItem);
 				}).fail(function(xhr, status, error) {
 					$('#content').append('<p>An Error has Occured</p>');
 				});
 			} else {
-				$form.prepend('<p>Please enter WorkItem name!</p>');
+				$form.prepend('<p>Please enter work item period!</p>');
 				
 			}
 		});
@@ -268,6 +273,6 @@ var confirmWorkItemDeleted = function() {
 }
 
 var addReturnButton = function() {
-    $('#mainColumn').append('<button id="showworkitems" type="button" name="button" class="btn btn-primary">List workitems</button>');
-    $('#showworkitems').click(loadData);
+    $('#mainColumn').append('<button id="showWorkItems" type="button" name="button" class="btn btn-primary">History</button>');
+    $('#showWorkItems').click(loadData);
 }

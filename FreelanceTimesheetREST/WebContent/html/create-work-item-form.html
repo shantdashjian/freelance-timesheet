@@ -3,10 +3,10 @@
 	<label for="period">Period: </label><input id="period" type="number" name="period" min="1"  value="1" required><label>Hours</label><br>
 	<label for="rate">Rate: $</label><input id="rate" type="number" name="rate"  min="1"  value="1" required><label>/hr</label><br>
 	<label>Date: </label>
-	<input id="month" type="number" name="month" min="1"  value="1" required>
+	<input id="month" type="number" name="month" min="1"  max = "12" value="1" required>
 	<input id="day" type="number" name="day" min="1"  max="31" value="1" required>
 	<input id="year" type="number" name="year" min="1"  value="2017" required><br>
-	<label for="notes">Notes: </label><textarea id="notes" name="notes" cols="30" rows="3"><br>
+	<div><label class="vertical-top" for="notes">Notes: </label><textarea id="notes" name="notes" cols="30" rows="3"></textarea></div>
 	
 	<input id="create" type="submit" name="createWorkItemButton" class="btn btn-primary" value="Add">
 </form>
