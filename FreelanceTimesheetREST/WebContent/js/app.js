@@ -4,22 +4,34 @@ $(document).ready(function() {
 
 var run = function(){
 	assignEventListenersToNavbar();
+	makeNavbarButtonActive("#newButton");
 	showCreateWorkItemForm();
 }
 
 var assignEventListenersToNavbar = function(){
 	$('#newButton').on('click', function(event){
 		event.preventDefault();
+		makeNavbarButtonActive('#newButton');
 		showCreateWorkItemForm();
 	});
 	$('#historyButton').on('click', function(event){
 		event.preventDefault();
+		makeNavbarButtonActive('#historyButton');
 		loadData();
 	});
 	$('#reportButton').on('click', function(event){
 		event.preventDefault();
+		makeNavbarButtonActive('#reportButton');
 		showReport();
 	});
+}
+
+var makeNavbarButtonActive = function(buttonToMakeActive){
+	var $allNavbarButtons = $('.nav').children();
+	$allNavbarButtons.each(function(){
+		$(this).removeClass('active');
+	});
+	$(buttonToMakeActive).addClass('active');
 }
 
 var loadData = function() {
