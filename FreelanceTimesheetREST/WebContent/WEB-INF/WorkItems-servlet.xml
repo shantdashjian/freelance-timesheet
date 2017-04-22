@@ -13,8 +13,8 @@
 
 	<context:component-scan base-package="controllers" />
 	
-<!-- 	<bean id="workitemdao" class="data.WorkItemDAOImpl"/>
- --> 	
+	<bean id="workitemdao" class="data.WorkItemDAOImpl"/>
+ 	
 
 	<bean id="myEntityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
