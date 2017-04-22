@@ -1,6 +1,18 @@
 $(document).ready(function() {
-    loadData();
+	assignEventListenersToNavbar();
+	showCreateWorkItemForm();
 })
+
+var assignEventListenersToNavbar = function(){
+	$('#newButton').on('click', function(event){
+		event.preventDefault();
+		showCreateWorkItemForm();
+	})
+	$('#historyButton').on('click', function(event){
+		event.preventDefault();
+		loadData();
+	})
+}
 
 var loadData = function() {
     $.ajax({
@@ -203,10 +215,11 @@ var showWorkItemDetailsToEdit = function(workItem) {
 }
 
 var showCreateWorkItemForm = function(){
+	cleanUpAndAddMainColumn();
 	$('#showCreateWorkItemButton').remove();
-	$('#mainContainer').append('<div id="formRow" class="row"></div>');
-	$('#formRow').append('<div class="col-md-6 col-md-offset-3 bordered form" id="formColumn"></div>');
-	$('#formColumn').load('html/create-work-item-form.html', function(){		
+//	$('#mainContainer').append('<div id="formRow" class="row"></div>');
+//	$('#formRow').append('<div class="col-md-6 col-md-offset-3 bordered form" id="formColumn"></div>');
+	$('#mainColumn').load('html/create-work-item-form.html', function(){		
 		var $form = $('#createWorkItemForm');
 		$form.submit(function(event) {
 			event.preventDefault();

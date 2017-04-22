@@ -17,7 +17,7 @@ public class WorkItem {
 	
 	private int period;
 	
-	private int rate;
+	private double rate;
 	
 	private int day;
 	
@@ -37,11 +37,11 @@ public class WorkItem {
 		this.period = period;
 	}
 
-	public int getRate() {
+	public double getRate() {
 		return rate;
 	}
 
-	public void setRate(int rate) {
+	public void setRate(double rate) {
 		this.rate = rate;
 	}
 
