@@ -71,7 +71,7 @@ var listWorkItemsAndShowCreateWorkItemButton = function(workItems) {
     var $viewButtonCells = $('tr td:nth-child(3)');
     $viewButtonCells.each(function() {
 
-        var $viewButton = $('<button  type="button" name="viewButton" class="btn btn-success">View</button>');
+        var $viewButton = $('<button  type="button" name="viewButton" class="btn btn-default">View</button>');
         $viewButton.attr('id', $(this).attr("workItemId"));
         $(this).append($viewButton);
         $viewButton.click(function() {
@@ -102,7 +102,7 @@ var listWorkItemsAndShowCreateWorkItemButton = function(workItems) {
     });
     
     // Create workItem button
-    var $createWorkItemButton = $('<button  type="button" id="showCreateWorkItemButton" class="btn btn-primary">Add Work Item</button>');
+    var $createWorkItemButton = $('<button  type="button" id="showCreateWorkItemButton" class="btn btn-success">Add Work Item</button>');
     $('#mainColumn').append($createWorkItemButton);
     $createWorkItemButton.click(function() {
         showCreateWorkItemForm();
@@ -297,7 +297,7 @@ var confirmWorkItemDeleted = function() {
 }
 
 var addReturnButton = function() {
-    $('#mainColumn').append('<button id="showWorkItems" type="button" name="button" class="btn btn-primary">History</button>');
+    $('#mainColumn').append('<button id="showWorkItems" type="button" name="button" class="btn btn-success">History</button>');
     $('#showWorkItems').click(loadData);
 }
 

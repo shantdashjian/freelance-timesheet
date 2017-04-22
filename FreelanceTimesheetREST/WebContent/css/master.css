@@ -1,5 +1,5 @@
 input[type=number] {
-	width: 4em;
+	width: 6em;
 }
 input[id=day], input[id=month] {
 	width: 3em;
@@ -47,7 +47,7 @@ th {
 }
 
 .bordered {
-    border: 2px solid purple;
+    border: 2px solid #222;
 }
 
 #mainColumn, #formColumn {
@@ -71,7 +71,8 @@ th {
 }
 
 .backgrounded {
-    background-color: #D19ED1;
+	color: #22c31f;
+    background-color: #444;
     padding: 6px;
 }
 
@@ -101,4 +102,17 @@ input, textarea {
 
 tfoot {
 	font-weight: bold;
+}
+
+#logo {
+	height:100%; 
+	width:auto;
+}
+
+.navbar-brand {
+	padding: 0;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: #22c31f !important;
 }
