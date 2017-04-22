@@ -8,7 +8,6 @@ var loadData = function() {
         url: 'api/workitems',
         dataType: 'json'
     }).done(function(workItems, status) {
-    	console.log(workItems);
         listWorkItemsAndShowCreateWorkItemButton(workItems);
     }).fail(function(xhr, status, error) {
         $('#content').append('<p>An Error has Occured</p>');
@@ -20,57 +19,58 @@ var listWorkItemsAndShowCreateWorkItemButton = function(workItems) {
     var $table = $('<table id="table" class="table table-bordered bordered">');
 
     var $thead = $('<thead>');
-    $thead.append('<tr><th>WorkItem Name</th><th class="fit">Action</th><th class="fit">Action</th><th class="fit">Action</th></tr>');
+    $thead.append('<tr><th>Work Item Period</th><th>Date</th><th class="fit">Action</th><th class="fit">Action</th><th class="fit">Action</th></tr>');
     $table.append($thead);
     var $tbody = $('<tbody>');
-    workitems.forEach(function(WorkItem, index, array) {
-        $tbody.append('<tr><td >' + capitalizeFirstLetter(WorkItem.name) 
-        		+ '</td><td WorkItemId="' + WorkItem.id + '"></td><td WorkItemId="' + WorkItem.id 
-        		+ '"></td><td WorkItemId="' + WorkItem.id + '"></td></tr>');
+    workItems.forEach(function(workItem, index, array) {
+        $tbody.append('<tr><td >' + workItem.period  
+        		+ '</td><td>'+ date(workItem.year, workItem.month, workItem.day) + '<td workItemId="' 
+        		+ workItem.id + '"></td><td workItemId="' + workItem.id 
+        		+ '"></td><td workItemId="' + workItem.id + '"></td></tr>');
     })
     $table.append($tbody);
-    $('#content').append('<div class="container">');
-    $('.container').append($table);
+    $('#content').append('<div id="mainContainer" class="container">');
+    $('#mainContainer').append($table);
 
     $($table).wrap('<div class="col-md-6 col-md-offset-3 bordered" id="mainColumn"></div>');
     $('#mainColumn').wrap('<div class="row"></div>');
-    $('#mainColumn').prepend("<h1 class=' backgrounded bordered'>It's WorkItem Time!</h1>");
+    $('#mainColumn').prepend("<h1 class=' backgrounded bordered'>Timesheet History</h1>");
 
-    var $viewButtonCells = $('tr td:nth-child(2)');
+    var $viewButtonCells = $('tr td:nth-child(3)');
     $viewButtonCells.each(function() {
 
         var $viewButton = $('<button  type="button" name="viewButton" class="btn btn-success">View</button>');
-        $viewButton.attr('id', $(this).attr("WorkItemId"));
+        $viewButton.attr('id', $(this).attr("workItemId"));
         $(this).append($viewButton);
         $viewButton.click(function() {
             showWorkItem($(this).attr('id'));
         });        
     });
     
-    var $editButtonCells = $('tr td:nth-child(3)');
+    var $editButtonCells = $('tr td:nth-child(4)');
     $editButtonCells.each(function() {
 
         var $editButton = $('<button  type="button" name="editButton" class="btn btn-warning">Edit</button>');
-        $editButton.attr('id', $(this).attr("WorkItemId"));
+        $editButton.attr('id', $(this).attr("workItemId"));
         $(this).append($editButton);
         $editButton.click(function() {
             editWorkItem($(this).attr('id'));
         });        
     });
     
-    var $deleteButtonCells = $('tr td:nth-child(4)');
+    var $deleteButtonCells = $('tr td:nth-child(5)');
     $deleteButtonCells.each(function() {
 
         var $deleteButton = $('<button  type="button" name="deleteButton" class="btn btn-danger">Delete</button>');
-        $deleteButton.attr('id', $(this).attr("WorkItemId"));
+        $deleteButton.attr('id', $(this).attr("workItemId"));
         $(this).append($deleteButton);
         $deleteButton.click(function() {
             deleteWorkItem($(this).attr('id'));
         });        
     });
     
-    // Create WorkItem button
-    var $createWorkItemButton = $('<button  type="button" id="showCreateWorkItemButton" class="btn btn-primary">Create WorkItem</button>');
+    // Create workItem button
+    var $createWorkItemButton = $('<button  type="button" id="showCreateWorkItemButton" class="btn btn-primary">Add Work Item</button>');
     $('#mainColumn').append($createWorkItemButton);
     $createWorkItemButton.click(function() {
         showCreateWorkItemForm();
@@ -84,8 +84,8 @@ var showWorkItem = function(id) {
         type: 'GET',
         url: 'api/workitems/' + id,
         dataType: 'json'
-    }).done(function(WorkItem, status) {
-        showWorkItemDetails(WorkItem);
+    }).done(function(workItem, status) {
+        showWorkItemDetails(workItem);
     }).fail(function(xhr, status, error) {
         $('#content').append('<p>An Error has Occured</p>');
     });
@@ -98,7 +98,7 @@ var editWorkItem = function(id) {
         type: 'GET',
         url: 'api/workitems/' + id,
         dataType: 'json'
-    }).done(function(WorkItem, status) {
+    }).done(function(workItem, status) {
         showWorkItemDetailsToEdit(WorkItem);
     }).fail(function(xhr, status, error) {
         $('#content').append('<p>An Error has Occured</p>');
@@ -107,7 +107,7 @@ var editWorkItem = function(id) {
 }
 
 var deleteWorkItem = function(id) {
-	var deleteWorkItem = confirm("Are you sure you want to delete this WorkItem?");
+	var deleteWorkItem = confirm("Are you sure you want to delete this work item?");
 	if (deleteWorkItem) {
 		
 		cleanUpAndAddMainColumn();
@@ -115,7 +115,7 @@ var deleteWorkItem = function(id) {
 		$.ajax({
 			type: 'DELETE',
 			url: 'api/workitems/' + id,
-		}).done(function(WorkItem, status) {
+		}).done(function(workItem, status) {
 			loadData();
 		}).fail(function(xhr, status, error) {
 			$('#content').append('<p>An Error has Occured</p>');
@@ -134,11 +134,11 @@ var cleanUpAndAddMainColumn = function() {
     $('#mainRow').append('<div class="col-md-6 col-md-offset-3 bordered" id="mainColumn"></div>');
 }
 
-var showWorkItemDetails = function(WorkItem) {
+var showWorkItemDetails = function(workItem) {
     $('#mainColumn').append('<h1  class="backgrounded bordered">' 
-    		+ capitalizeFirstLetter(WorkItem.name) + '</h1>');
+    		+ capitalizeFirstLetter(workItem.name) + '</h1>');
    
-	// GET workitems/{WorkItemId}/questions
+	// GET workitems/{workItemId}/questions
     $.ajax({
         type: 'GET',
         url: 'api/workitems/'+WorkItem.id+'/questions',
@@ -165,7 +165,7 @@ var showWorkItemDetails = function(WorkItem) {
 
 }
 
-var showWorkItemDetailsToEdit = function(WorkItem) {
+var showWorkItemDetailsToEdit = function(workItem) {
 	
 	
 	// PUT workitems/{id}
@@ -213,7 +213,7 @@ var showWorkItemDetailsToEdit = function(WorkItem) {
 
 var showCreateWorkItemForm = function(){
 	$('#showCreateWorkItemButton').remove();
-	$('.container').append('<div id="formRow" class="row"></div>');
+	$('#mainContainer').append('<div id="formRow" class="row"></div>');
 	$('#formRow').append('<div class="col-md-6 col-md-offset-3 bordered form" id="formColumn"></div>');
 	$('#formColumn').load('html/create-WorkItem-form.html', function(){		
 		var $form = $('#createWorkItemForm');
