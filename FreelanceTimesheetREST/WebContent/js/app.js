@@ -99,7 +99,7 @@ var editWorkItem = function(id) {
         url: 'api/workitems/' + id,
         dataType: 'json'
     }).done(function(workItem, status) {
-        showWorkItemDetailsToEdit(WorkItem);
+        showWorkItemDetailsToEdit(workItem);
     }).fail(function(xhr, status, error) {
         $('#content').append('<p>An Error has Occured</p>');
     });
@@ -134,80 +134,87 @@ var cleanUpAndAddMainColumn = function() {
     $('#mainRow').append('<div class="col-md-6 col-md-offset-3 bordered" id="mainColumn"></div>');
 }
 
-var showWorkItemDetails = function(workItem) {
-    $('#mainColumn').append('<h1  class="backgrounded bordered">' 
-    		+ capitalizeFirstLetter(workItem.name) + '</h1>');
-   
-	// GET workitems/{workItemId}/questions
-    $.ajax({
-        type: 'GET',
-        url: 'api/workitems/'+WorkItem.id+'/questions',
-        dataType: 'json'
-    }).done(function(questions, status) {
-    	var $questionsRow = $('<div class="questions-row row">');
-
-        var $questionsRowColumn = $('<div class="col-md-12">');
-        
-        $questionsRowColumn.append('<h4>Questions:</h4>');
-        var $questionsList = $('<ol id="questions-list">');
-        questions.forEach(function(question, index) {
-        	$questionsList.append('<li>' + question.questionText + '</li>');
-        })
-        $questionsRowColumn.append($questionsList);
-        $questionsRow.append($questionsRowColumn);
-        $('#mainColumn').append($questionsRow);
-        addReturnButton();
-        
-    }).fail(function(xhr, status, error) {
-        $('#mainColumn').append('<p>No questions were retrieved!</p>');
-        addReturnButton();
-    });
-
-}
+//var showWorkItemDetails = function(workItem) {
+//    $('#mainColumn').append('<h1  class="backgrounded bordered">' 
+//    		+ capitalizeFirstLetter(workItem.name) + '</h1>');
+//   
+//	// GET workitems/{workItemId}/questions
+//    $.ajax({
+//        type: 'GET',
+//        url: 'api/workitems/'+WorkItem.id+'/questions',
+//        dataType: 'json'
+//    }).done(function(questions, status) {
+//    	var $questionsRow = $('<div class="questions-row row">');
+//
+//        var $questionsRowColumn = $('<div class="col-md-12">');
+//        
+//        $questionsRowColumn.append('<h4>Questions:</h4>');
+//        var $questionsList = $('<ol id="questions-list">');
+//        questions.forEach(function(question, index) {
+//        	$questionsList.append('<li>' + question.questionText + '</li>');
+//        })
+//        $questionsRowColumn.append($questionsList);
+//        $questionsRow.append($questionsRowColumn);
+//        $('#mainColumn').append($questionsRow);
+//        addReturnButton();
+//        
+//    }).fail(function(xhr, status, error) {
+//        $('#mainColumn').append('<p>No questions were retrieved!</p>');
+//        addReturnButton();
+//    });
+//
+//}
 
 var showWorkItemDetailsToEdit = function(workItem) {
-	
-	
-	// PUT workitems/{id}
 	var $form = $('<form name="editWorkItemForm" id="editWorkItemForm">');
-	$form.append('<label for="name">WorkItem Name: </label>');
-	$form.append('<input id="name" type="text" name="name"  size="12" value="'+WorkItem.name+'" required><br>');
-	
+	$form.append('<label for="period">Period: </label><input id="period" type="number" name="period" min="1"  value="'+workItem.period+'" required><label>Hours</label><br>');
+	$form.append('<label for="rate">Rate: $</label><input id="rate" type="number" name="rate" min="1"  value="'+workItem.rate+'" required><label>/hr</label><br>');
+	$form.append('<label>Date: </label>');
+	$form.append('<input id="month" type="number" name="month" min="1"  max = "12" value="'+workItem.month+'" required>');
+	$form.append('<input id="day" type="number" name="day" min="1"  max="31" value="'+workItem.day+'" required>');
+	$form.append('<input id="year" type="number" name="year" min="1"  value="'+workItem.year+'" required><br>');
+	$form.append('<div><label class="vertical-top" for="notes">Notes: </label><textarea id="notes" name="notes" cols="30" rows="3">'+workItem.notes+'</textarea></div>');
+
 	// edit button
 	var $editButton = $('<input id="edit" type="submit" name="editWorkItemButton" class="btn btn-warning" value="Submit">');
 	$form.append($editButton);
 //	$createButton.click(function(event) {
 	$form.submit(function(event) {
 		event.preventDefault();
-		if ($(editWorkItemForm.name).val()) {
+		if ($(editWorkItemForm.period).val()) {
 			
-			var WorkItem = {
-					name: $(editWorkItemForm.name).val()
+			var mappedWorkItem = {
+					period: $(editWorkItemForm.period).val(),
+					rate: $(editWorkItemForm.rate).val(),
+					month: $(editWorkItemForm.month).val(),
+					day: $(editWorkItemForm.day).val(),
+					year: $(editWorkItemForm.year).val(),
+					notes: $(editWorkItemForm.notes).val()
 			};
+			// PUT workitems/{id}
 			$.ajax({
 				type: "PUT",
-		        url: 'api/workitems/'+WorkItem.id,
+		        url: 'api/workitems/'+workItem.id,
 				dataType: "json",
 				contentType: 'application/json', //setting the request headers content-type
-				data: JSON.stringify(WorkItem) //the data being added to the request body
-			}).done(function(WorkItem, status) {
+				data: JSON.stringify(mappedWorkItem) //the data being added to the request body
+			}).done(function(workItem, status) {
 			    cleanUpAndAddMainColumn();
-				confirmWorkItemEditted(WorkItem);
+				confirmWorkItemEditted(workItem);
 			}).fail(function(xhr, status, error) {
 			    cleanUpAndAddMainColumn();
 				$('#mainColumn').append('<p>An Error has Occured</p>');
 				addReturnButton();
 			});
 		} else {
-			$form.prepend('<p>Please enter WorkItem name!</p>');
+			$form.prepend('<p>Please enter work item period!</p>');
 
 		}
-	});
+	});	
 	
-	
-	$('#mainColumn').append("<h1 class='backgrounded bordered'>Edit WorkItem!</h1>");
+	$('#mainColumn').append("<h1 class='backgrounded bordered'>Edit Work Item!</h1>");
 	$('#mainColumn').append($form);
-	
+//	
 	
 }
 
