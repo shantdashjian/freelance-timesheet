@@ -1,7 +1,7 @@
 # Freelance Timesheet
 A Spring REST web application that keeps track of freelance work over time and provides a report.
 
-![alt text](website.png "Calculator")
+![alt text](website.png "Freelance Timesheet")
 
 ## In This Document:
 1. [Application URL](#application-url)
