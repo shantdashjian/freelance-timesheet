@@ -47,6 +47,7 @@ var loadData = function() {
 }
 
 var listWorkItemsAndShowCreateWorkItemButton = function(workItems) {
+	makeNavbarButtonActive("#historyButton");
     $('#content').empty();
     var $table = $('<table id="historyTable" class="table table-bordered table-striped bordered">');
 
@@ -235,6 +236,7 @@ var showWorkItemDetailsToEdit = function(workItem) {
 }
 
 var showCreateWorkItemForm = function(){
+	makeNavbarButtonActive("#newButton");
 	cleanUpAndAddMainColumn();
 	$('#showCreateWorkItemButton').remove();
 //	$('#mainContainer').append('<div id="formRow" class="row"></div>');
@@ -302,6 +304,7 @@ var addReturnButton = function() {
 }
 
 var showReport = function() {
+	makeNavbarButtonActive("#reportButton");
 	$.ajax({
         type: 'GET',
         url: 'api/workitems',
