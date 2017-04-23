@@ -28,7 +28,7 @@ http://shaundashjian.com:8080/FreelanceTimesheet/
 ## Technologies Used
   * Spring REST web services
   * Java
-  * HTML, CSS, JavaScript and jQuery
+  * HTML, CSS, JavaScript, and jQuery
   * JPA and Hibernate
   * MySQL
 
