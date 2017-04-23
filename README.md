@@ -1,5 +1,5 @@
 # Freelance Timesheet
-A Spring REST web application that keeps track of freelance work over time and provides report.
+A Spring REST web application that keeps track of freelance work over time and provides a report.
 
 ![alt text](website.png "Calculator")
 
@@ -15,7 +15,10 @@ http://shaundashjian.com:8080/FreelanceTimesheet/
 
 ## How to Use the Application
 * The landing page shows a form for the user to fill and add a new work item
-* The navgation bar includes the following options: New, History, and Report
+* The navgation bar includes the following options: 
+  * New 
+  * History
+  * Report
 * The user can select the New option to bring up the form to add a new work item
 * The user can select the History option to view a list of all work items in the system
   * Here, the user could view, edit, or delete each work item individually
@@ -31,9 +34,9 @@ http://shaundashjian.com:8080/FreelanceTimesheet/
 
 ## Future Feature Sets:
   * Enhance reporting to include:
-   * Total pay between two dates
-   * Total pay from a certian client
-   * Average pay per week
+    * Total pay between two dates
+    * Total pay from a certian client
+    * Average pay per week
   * Search for a certain work item
    
   
