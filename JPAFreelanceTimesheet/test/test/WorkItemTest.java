@@ -42,7 +42,7 @@ public class WorkItemTest {
 	        allOf(
 	        	hasProperty("id", is(1)),	           
 	        	hasProperty("period", is(4)),	           
-	        	hasProperty("rate", is(60)),	           
+	        	hasProperty("rate", is(60.0)),	           
 	        	hasProperty("day", is(21)),	           
 				hasProperty("month", is(4)),
 				hasProperty("year", is(2017)),           
