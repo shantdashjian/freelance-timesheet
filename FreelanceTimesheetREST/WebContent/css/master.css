@@ -36,7 +36,7 @@ body {
     background-color: #EEEEAF;
 } */
 
-#historyTable tr td:nth-child(3):hover, .table tr td:nth-child(4):hover, .table tr td:nth-child(5):hover {
+#historyTable tr td:nth-child(3):hover, #historyTable tr td:nth-child(4):hover, #historyTable tr td:nth-child(5):hover {
     background-color: #fff !important;
     cursor: pointer;
     cursor: hand;
