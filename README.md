@@ -7,6 +7,7 @@ A Spring REST web application that keeps track of freelance work over time and p
 1. [Application URL](#application-url)
 2. [How to Use the Application](#how-touse-the-application)
 3. [Technologies Used](#technologies-used)
+4. [Data Model](#data-model)
 5. [Future Feature Sets](#future-feature-sets)
 6. [Stumbling and Learning Points](#stumbling-and-learning-points)
 
@@ -32,6 +33,9 @@ http://shaundashjian.com:8080/FreelanceTimesheet/
   * HTML, CSS, JavaScript, and jQuery
   * JPA and Hibernate
   * MySQL
+
+## Data Model
+![alt text](data-model.png "Data Model")
 
 ## Future Feature Sets:
   * Enhance reporting to include:
