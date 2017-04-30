@@ -1,1 +1,26 @@
-<h1>Report</h1>
+<h1 class=' backgrounded bordered'>Report</h1>
+<table id="table" class="table table-bordered table-striped bordered">
+	<thead>
+		<tr>
+			<th class="fit">Period (Hours)</th>
+			<th class="fit">Rate per Hour</th>
+			<th class="fit">Date</th>
+			<th class="fit">Notes</th>
+			<th class="fit">Total</th>
+		</tr>
+	</thead>
+    <tbody>
+    <tr ng-repeat="workItem in vm.workItems">
+    		<td >{{workItem.period}}</td>
+        	<td >{{workItem.rate | currency}}</td>
+        	<td>{{workItem.year+"/"+workItem.month+"/"+workItem.day}}</td>
+        	<td >{{workItem.notes}}</td>
+        	<td >{{workItem.period * workItem.rate | currency}}</td>
+    </tr>
+    
+    <tfoot>
+    		<tr>
+    			<td colspan="4" class="align-right">Total</td>
+    			<td>{{vm.total}}</td>
+    		</tr>
+    	<tfoot>

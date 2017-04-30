@@ -19,6 +19,8 @@ angular.module('nav')
 			});
 //			angular.element($event.currentTarget).addClass('active');
 		}
+		
+		
 	},
 	controllerAs: 'vm'
 })
