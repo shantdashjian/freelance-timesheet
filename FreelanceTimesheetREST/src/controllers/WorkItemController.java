@@ -30,19 +30,31 @@ public class WorkItemController {
 
 	// GET workitems
 	@RequestMapping(path = "workitems", method = RequestMethod.GET)
-	public List<WorkItem> index() {
+	public List<WorkItem> index(HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+		response.addHeader("Access-Control-Max-Age", "1000");
+		response.addHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type, origin, authorization, accept, client-security-token");
 		return workItemDAO.index();
 	}
 
 	// GET workitems/{id}
 	@RequestMapping(path = "workitems/{id}", method = RequestMethod.GET)
-	public WorkItem index(@PathVariable int id) {
+	public WorkItem index(@PathVariable int id, HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+		response.addHeader("Access-Control-Max-Age", "1000");
+		response.addHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type, origin, authorization, accept, client-security-token");
 		return workItemDAO.show(id);
 	}
 
 	// POST workitems
 	@RequestMapping(path = "workitems", method = RequestMethod.POST)
 	public WorkItem create(@RequestBody String jsonWorkItem, HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+		response.addHeader("Access-Control-Max-Age", "1000");
+		response.addHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type, origin, authorization, accept, client-security-token");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			WorkItem mappedWorkItem = mapper.readValue(jsonWorkItem, WorkItem.class);
@@ -57,6 +69,10 @@ public class WorkItemController {
 	// PUT workitems/{id}
 	@RequestMapping(path = "workitems/{id}", method = RequestMethod.PUT)
 	public WorkItem update(@PathVariable int id, @RequestBody String jsonWorkItem, HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+		response.addHeader("Access-Control-Max-Age", "1000");
+		response.addHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type, origin, authorization, accept, client-security-token");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			WorkItem mappedWorkItem = mapper.readValue(jsonWorkItem, WorkItem.class);
@@ -67,10 +83,14 @@ public class WorkItemController {
 			return null;
 		}
 	};
-	
+
 	// DELETE workitems/{id}
-	@RequestMapping(path="workitems/{id}", method=RequestMethod.DELETE)
-	public boolean destroy(@PathVariable int id, HttpServletResponse response){
+	@RequestMapping(path = "workitems/{id}", method = RequestMethod.DELETE)
+	public boolean destroy(@PathVariable int id, HttpServletResponse response) {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+		response.addHeader("Access-Control-Max-Age", "1000");
+		response.addHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type, origin, authorization, accept, client-security-token");
 		response.setStatus(202);
 		return workItemDAO.destroy(id);
 	}
