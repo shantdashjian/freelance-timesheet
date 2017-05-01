@@ -24,10 +24,7 @@ angular.module('appModule', ['nav', 'static', 'timesheet', 'ngRoute'])
 	    .when('/history/:id/edit', {
 	    	template : '<history-edit>Loading history edit</history-edit>'
 	    })
-	    .when('/history/:id/delete', {
-	    	template : '<history-delete>Loading history delete</history-delete>'
-	    })
 	    .otherwise({
-	      template : '<not-found>Loading not found</not-found>'
+	      template : '<error>Loading error</error>'
 	    })
 	});

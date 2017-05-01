@@ -21,7 +21,16 @@ angular.module('timesheet')
 			$location.path("/history/"+id + "/edit");
 		}
 		vm.deleteWorkItem = function(id) {
-			$location.path("/history/"+id + "/delete");
+			var deleteWorkItem = confirm("Are you sure you want to delete this work item?");
+			if (deleteWorkItem) {
+				timesheetService.destroy(id)
+				.then(function(response) {
+					vm.reload();
+				})
+				.catch(function(error) {
+					$location.path("/error");
+				});
+			}
 		}
 		
 	},

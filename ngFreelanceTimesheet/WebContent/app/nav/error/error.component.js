@@ -1,6 +1,6 @@
 angular.module('nav')
-.component('notFound',{
-	templateUrl: 'app/nav/notFound/notFound.component.html',
+.component('error',{
+	templateUrl: 'app/nav/error/error.component.html',
 	controller: function(){
 		var vm = this;
 	},
