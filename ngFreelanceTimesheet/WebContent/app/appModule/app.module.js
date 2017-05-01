@@ -2,7 +2,7 @@ angular.module('appModule', ['nav', 'static', 'timesheet', 'ngRoute'])
 .config(function($routeProvider){
 	  $routeProvider
 	    .when('/', {
-	      template : '<home>Loading home</home>'
+	      template : '<new>Loading home</new>'
 	    })	    
 	    .when('/history', {
 	      template : '<history>Loading history</history>'
@@ -12,10 +12,6 @@ angular.module('appModule', ['nav', 'static', 'timesheet', 'ngRoute'])
 	    })
 	    .when('/report', {
 	      template : '<report>Loading report</report>'
-
-	    })
-	    .when('/about', {
-	      template : '<about>Loading about</about>'
 
 	    })
 	    .when('/history/:id', {
