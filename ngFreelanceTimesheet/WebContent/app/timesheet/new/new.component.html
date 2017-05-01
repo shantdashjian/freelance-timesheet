@@ -1,1 +1,12 @@
-<h1>New</h1>
+<h1 class='backgrounded bordered'>Add New Work Item</h1>
+<form>
+	<label>Period: </label><input ng-model="vm.workItem.period" type="number"  min="1"  value="1" required><label>Hours</label><br>
+	<label >Rate: $</label><input ng-model="vm.workItem.rate"  type="number"  min="1.00"  value="1.00" step="0.01" required><label>/hr</label><br>
+	<label>Date: </label>
+	<input ng-model="vm.workItem.month"  type="number" min="1"  max = "12" value="1" required>
+	<input ng-model="vm.workItem.day" type="number" min="1"  max="31" value="1" required>
+	<input ng-model="vm.workItem.year" type="number" min="1"  value="2017" required><br>
+	<div><label class="vertical-top">Notes: </label><textarea ng-model="vm.workItem.notes" cols="30" rows="3"></textarea></div>
+	
+	<input ng-click="vm.submit()" type="submit" class="btn btn-success" value="Add">
+</form>

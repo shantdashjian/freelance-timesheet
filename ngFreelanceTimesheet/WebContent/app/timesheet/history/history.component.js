@@ -33,6 +33,10 @@ angular.module('timesheet')
 			}
 		}
 		
+		vm.showCreateWorkItemForm = function(){
+			$location.path("/new");
+		}
+		
 	},
 	controllerAs: 'vm',
 	

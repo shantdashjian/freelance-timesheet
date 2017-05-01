@@ -3,12 +3,12 @@ angular.module('appModule', ['nav', 'static', 'timesheet', 'ngRoute'])
 	  $routeProvider
 	    .when('/', {
 	      template : '<home>Loading home</home>'
+	    })	    
+	    .when('/history', {
+	      template : '<history>Loading history</history>'
 	    })
 	    .when('/new', {
 	      template : '<new>Loading new</new>'
-	    })
-	    .when('/history', {
-	      template : '<history>Loading history</history>'
 	    })
 	    .when('/report', {
 	      template : '<report>Loading report</report>'
