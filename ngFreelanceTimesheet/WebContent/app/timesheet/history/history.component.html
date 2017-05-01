@@ -1,1 +1,64 @@
-<h1>History</h1>
+<h1 class=' backgrounded bordered'>Timesheet History</h1>
+<table id="historyTable" class="table table-bordered table-striped bordered">
+	<thead>
+   		<tr>
+   			<th>Work Item Period</th>
+   			<th>Date</th>
+   			<th class="fit">Action</th>
+   			<th class="fit">Action</th>
+   			<th class="fit">Action</th>
+   		</tr>
+   	</thead>
+    <tbody>
+    		<tr ng-repeat="workItem in vm.workItems">
+    			<td >{{workItem.period}}</td>
+    			<td>{{workItem.month + "/" + workItem.day + "/" + workItem.year}}</td>
+    			<td ng-click="vm.showWorkItem(workItem.id)"><button  type="button" name="viewButton" class="btn btn-default">View</button></td>
+    			<td ng-click="vm.editWorkItem(workItem.id)"><button  type="button" name="editButton" class="btn btn-warning">Edit</button></td>
+    			<td ng-click="vm.deleteWorkItem(workItem.id)"><button  type="button" name="deleteButton" class="btn btn-danger">Delete</button></td>
+    		</tr>
+    	</tbody>
+ </table>
+ <button ng-click="vm.showCreateWorkItemForm()" type="button" id="showCreateWorkItemButton" class="btn btn-success">Add Work Item</button>	
+    
+    
+
+    <!-- var $viewButtonCells = $('tr td:nth-child(3)');
+    $viewButtonCells.each(function() {
+
+        var $viewButton = $('<button  type="button" name="viewButton" class="btn btn-default">View</button>');
+        $viewButton.attr('id', $(this).attr("workItemId"));
+        $(this).append($viewButton);
+        $viewButton.click(function() {
+            showWorkItem($(this).attr('id'));
+        });        
+    });
+    
+    var $editButtonCells = $('tr td:nth-child(4)');
+    $editButtonCells.each(function() {
+
+        var $editButton = $('<button  type="button" name="editButton" class="btn btn-warning">Edit</button>');
+        $editButton.attr('id', $(this).attr("workItemId"));
+        $(this).append($editButton);
+        $editButton.click(function() {
+            editWorkItem($(this).attr('id'));
+        });        
+    });
+    
+    var $deleteButtonCells = $('tr td:nth-child(5)');
+    $deleteButtonCells.each(function() {
+
+        var $deleteButton = $('<button  type="button" name="deleteButton" class="btn btn-danger">Delete</button>');
+        $deleteButton.attr('id', $(this).attr("workItemId"));
+        $(this).append($deleteButton);
+        $deleteButton.click(function() {
+            deleteWorkItem($(this).attr('id'));
+        });        
+    }); -->
+    
+    <!-- // Create workItem button
+    var $createWorkItemButton = $('<button  type="button" id="showCreateWorkItemButton" class="btn btn-success">Add Work Item</button>');
+    $('#mainColumn').append($createWorkItemButton);
+    $createWorkItemButton.click(function() {
+        showCreateWorkItemForm();
+    }); -->   

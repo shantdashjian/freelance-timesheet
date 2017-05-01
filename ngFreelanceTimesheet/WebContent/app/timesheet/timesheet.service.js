@@ -52,22 +52,6 @@ angular.module('timesheet')
 			url : BASE_URL + id,
 		})
 	};
-	
-//	service.getTotalPay = function(){
-//		var total = 0;
-//		service.index()
-//		.then(function(response){
-//			var data = response.data;
-//			data.forEach(function(workItem, index, array) {
-//				var itemTotal = workItem.period * workItem.rate;
-//				total += itemTotal;
-//				
-//			});
-//			console.log(total);
-//			return total;
-//		})
-//		
-//	}
-	
+		
 	return service;
 })
