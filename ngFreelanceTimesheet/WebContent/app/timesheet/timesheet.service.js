@@ -2,7 +2,7 @@ angular.module('timesheet')
 .factory('timesheetService', function($http) {
 	var service = {};
 
-	var BASE_URL = 'http://localhost:8080/FreelanceTimesheetREST/api/workitems/';
+	var BASE_URL = 'http://shaundashjian.com:8080/FreelanceTimesheetREST/api/workitems/';
 
 	// private
 	var workItems = [];
