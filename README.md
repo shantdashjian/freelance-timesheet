@@ -1,5 +1,5 @@
 # Freelance Timesheet
-A Spring REST web application that keeps track of freelance work over time and provides a report.
+An AngularJS Spring REST web application that keeps track of freelance work over time and provides a report.
 
 ![alt text](website.png "Freelance Timesheet")
 
