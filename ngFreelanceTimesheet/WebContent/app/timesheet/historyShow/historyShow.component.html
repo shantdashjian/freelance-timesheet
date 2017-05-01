@@ -1,0 +1,16 @@
+<h1  class="backgrounded bordered">{{vm.workItem.notes}}</h1>
+<div name="details" id="details" class="form-horizontal">
+	<div class="form-group">
+		<label for="period" class="label label-info control-label">Period</label>
+			<span id="period" name="period">{{vm.workItem.period}}</span><span> hours</span>
+	</div>
+	<div class="form-group">
+		<label class="label label-info control-label">Rate</label>
+			<span id="rate" name="rate">{{vm.workItem.rate | currency}}</span><span>/hr</span>
+	</div>
+	<div class="form-group">
+		<label class="label label-info control-label">Date</label>
+			<span id="date" name="date">{{vm.workItem.month + "/" + vm.workItem.day + "/" + vm.workItem.year}}</span>
+	</div>
+</div>
+<return-button>Loading return button ... </return-button>

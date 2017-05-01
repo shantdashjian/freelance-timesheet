@@ -1,7 +1,7 @@
 angular.module('timesheet')
 .component('history',{
 	templateUrl: 'app/timesheet/history/history.component.html',
-	controller: function(timesheetService){
+	controller: function(timesheetService, $location){
 		var vm = this;
 		vm.workItems = [];
 				
@@ -14,6 +14,9 @@ angular.module('timesheet')
 		
 		vm.reload();
 		
+		vm.showWorkItem = function(id) {
+			$location.path("/history/"+id);
+		}
 		
 	},
 	controllerAs: 'vm',
