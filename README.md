@@ -47,6 +47,7 @@ http://shaundashjian.com:8080/FreelanceTimesheet/
    
   
 ## Stumbling and Learning Points:
+  * Learning about CORS (Cross-Origin Request Sharing)
   * Better utilization of existing Bootstrap classes
   <hr>
 
